@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "data": "libs/data",
+    "nx-monorepo": "apps/nx-monorepo",
+    "nx-monorepo-e2e": "apps/nx-monorepo-e2e",
+    "nx-monorepo-service": "apps/nx-monorepo-service",
+    "ui": "libs/ui"
+  }
+}

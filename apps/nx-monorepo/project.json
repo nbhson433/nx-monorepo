@@ -1,0 +1,95 @@
+{
+  "projectType": "application",
+  "sourceRoot": "apps/nx-monorepo/src",
+  "prefix": "nx-monorepo",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/nx-monorepo",
+        "index": "apps/nx-monorepo/src/index.html",
+        "main": "apps/nx-monorepo/src/main.ts",
+        "polyfills": "apps/nx-monorepo/src/polyfills.ts",
+        "tsConfig": "apps/nx-monorepo/tsconfig.app.json",
+        "assets": [
+          "apps/nx-monorepo/src/favicon.ico",
+          "apps/nx-monorepo/src/assets"
+        ],
+        "styles": ["apps/nx-monorepo/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/nx-monorepo/src/environments/environment.ts",
+              "with": "apps/nx-monorepo/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "nx-monorepo:build:production"
+        },
+        "development": {
+          "browserTarget": "nx-monorepo:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/nx-monorepo/proxy.conf.json"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "nx-monorepo:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/nx-monorepo/**/*.ts",
+          "apps/nx-monorepo/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/nx-monorepo"],
+      "options": {
+        "jestConfig": "apps/nx-monorepo/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
